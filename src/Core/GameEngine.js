@@ -1,13 +1,25 @@
 import { useEffect } from 'react';
+import AssetManager from '../Core/AssetManager';
 import { drawImage } from '../Functions/drawFunctions';
-import gameBackground from '../Images/background.jpg';
+import { GAME_BACKGROUND } from '../Models/stateTypes';
+import store from '../store';
 
-const InitGame = (canvasRef) => {
+
+const LoadFiles = () => {
   useEffect(() => {
-    const canvas = canvasRef.current;
-    const context = canvas.getContext('2d');
-    drawImage(context, gameBackground, 0, 0);
+    AssetManager();
   });
 };
 
-export default InitGame;
+const drawBackground = (context) => {
+  const gameBackround = store.getState().sprites.find(sprite => sprite.name === GAME_BACKGROUND);
+  drawImage(context, gameBackround.image, 0, 0);
+};
+
+export const GameInit = (canvasRef) => {
+  const canvas = canvasRef.current;
+  const context = canvas.getContext('2d');
+  drawBackground(context);
+};
+
+export default LoadFiles;

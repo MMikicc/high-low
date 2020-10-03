@@ -7,9 +7,9 @@ module.exports = {
     },
     rules: {
       'linebreak-style': 0,
-      "import/no-named-as-default": "off",
-      "import/no-named-as-default-member": "off",
-      'react/prop-types': false,
+      "import/no-named-as-default": 0,
+      "import/no-named-as-default-member": 0,
+      'react/prop-types': 0,
       "react/jsx-filename-extension": [
         1,
         {
