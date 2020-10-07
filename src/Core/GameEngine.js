@@ -1,25 +1,42 @@
-import { useEffect } from 'react';
-import AssetManager from '../Core/AssetManager';
+import { useEffect, useRef } from 'react';
+import AssetManager, { isFinishedLoading } from '../Core/AssetManager';
 import { drawImage } from '../Functions/drawFunctions';
 import { GAME_BACKGROUND } from '../Models/stateTypes';
 import store from '../store';
+import GameView from './GameView';
 
 
-const LoadFiles = () => {
+const useLoadFiles = () => {
   useEffect(() => {
     AssetManager();
   });
 };
 
-const drawBackground = (context) => {
+export const drawBackground = (context) => {
   const gameBackround = store.getState().sprites.find(sprite => sprite.name === GAME_BACKGROUND);
-  drawImage(context, gameBackround.image, 0, 0);
+  drawImage(context, gameBackround.image, 0, 0, window.innerWidth, window.innerHeight);
 };
 
-export const GameInit = (canvasRef) => {
-  const canvas = canvasRef.current;
-  const context = canvas.getContext('2d');
-  drawBackground(context);
+const useDrawBackground = (canvasRef) => {
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const context = canvas.getContext('2d');
+    const unsubscribe = store.subscribe(() => {
+      if (isFinishedLoading()) {
+        drawBackground(context);
+        unsubscribe();
+      }
+    });
+  });
 };
 
-export default LoadFiles;
+
+export const GameInit = () => {
+  const canvasRef = useRef();
+  useDrawBackground(canvasRef);
+  GameView(canvasRef);
+
+  return canvasRef;
+};
+
+export default useLoadFiles;

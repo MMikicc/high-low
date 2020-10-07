@@ -6,25 +6,44 @@ import { CARDS, GAME_BACKGROUND } from '../Models/stateTypes';
 
 const loadCards = () => {
   let i = 2;
-  i = 2;
-  while (i <= 15) {
-    store.dispatch(addCard('Heart', i === 15 ? 1 : i, 1, i - 2));
+  let j = 2;
+  while (i <= 14) {
+    if (j === 11) {
+      j += 1;
+    }
+    store.dispatch(addCard('Heart', j === 15 ? 1 : j, 0, i - 2));
     i += 1;
+    j += 1;
   }
   i = 2;
-  while (i <= 15) {
-    store.dispatch(addCard('Diamond', i === 15 ? 1 : i, 1, i - 2));
+  j = 2;
+  while (i <= 14) {
+    if (j === 11) {
+      j += 1;
+    }
+    store.dispatch(addCard('Diamond', j === 15 ? 1 : j, 1, i - 2));
     i += 1;
+    j += 1;
   }
   i = 2;
-  while (i <= 15) {
-    store.dispatch(addCard('Club', i === 15 ? 1 : i, 1, i - 2));
+  j = 2;
+  while (i <= 14) {
+    if (j === 11) {
+      j += 1;
+    }
+    store.dispatch(addCard('Club', j === 15 ? 1 : j, 2, i - 2));
     i += 1;
+    j += 1;
   }
   i = 2;
-  while (i <= 15) {
-    store.dispatch(addCard('Spade', i === 15 ? 1 : i, 1, i - 2));
+  j = 2;
+  while (i <= 14) {
+    if (j === 11) {
+      j += 1;
+    }
+    store.dispatch(addCard('Spade', j === 15 ? 1 : j, 3, i - 2));
     i += 1;
+    j += 1;
   }
 };
 
@@ -35,6 +54,13 @@ const loadSprite = (sprite, name) => {
   image.onload = () => {
     store.dispatch(addSprite(image, name));
   };
+};
+
+export const isFinishedLoading = () => {
+  if (store.getState().loaded === store.getState().sprites.length && store.getState().loaded !== 0) {
+    return true;
+  }
+  return false;
 };
 
 const AssetManager = () => {

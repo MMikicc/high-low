@@ -1,20 +1,10 @@
-import React, { useEffect, useRef } from 'react';
-import store from '../store';
-import LoadFiles, { GameInit } from './GameEngine';
+import React from 'react';
+import useLoadFiles, { GameInit } from './GameEngine';
 
 const Canvas = () => {
-  const canvasRef = useRef(null);
-  LoadFiles();
-  useEffect(() => {
-    const unsubscribe = store.subscribe(() => {
-      // eslint-disable-next-line max-len
-      if (store.getState().loaded === store.getState().sprites.length && store.getState().loaded !== 0) {
-        GameInit(canvasRef);
-        unsubscribe();
-      }
-    });
-  });
-  return <canvas ref={canvasRef} width={window.innerWidth} height={window.innerHeight} />;
+  useLoadFiles();
+  const canvasRef = GameInit();
+  return <div style={{ height: '80%', width: '100%' }}><canvas ref={canvasRef} width={window.innerWidth} height={window.innerHeight * 0.75} /></div>;
 };
 
 export default Canvas;

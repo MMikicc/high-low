@@ -1,0 +1,28 @@
+.interface {
+    background-image: url('../Images/background.jpg');
+    background-position-y: center;
+    border-top: 5px dashed black;
+    color: white;
+}
+
+.alert {
+    -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 1s; /* Firefox < 16 */
+        -ms-animation: fadein 1s; /* Internet Explorer */
+         -o-animation: fadein 1s; /* Opera < 12.1 */
+            animation: fadein 1s;
+}
+
+@keyframes fadein {
+    from {opacity: 0.2;}
+    to{opacity: 1;}
+}
+
+.alertHide {
+    opacity: 0;
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}

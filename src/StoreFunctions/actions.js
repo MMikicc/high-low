@@ -22,3 +22,13 @@ export const addSprite = (image, name) => ({
 export const toggleLoaded = () => ({
   type: types.CHANGE_STATE,
 });
+
+export const playCard = (type, number, xTile, yTile) => ({
+  type: types.PLAY_CARD,
+  payload: {
+    type,
+    number,
+    xTile,
+    yTile,
+  },
+});
