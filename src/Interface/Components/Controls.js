@@ -1,8 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Controls = (props) => {
   const [bidAmountValue, setBidAmountValue] = useState(1);
   const [showAlert, setShowAlert] = useState(false);
+
+  useEffect(() => {
+    if (sessionStorage.getItem('bidAmountValue')) {
+      const bidAmountSes = sessionStorage.getItem('bidAmountValue');
+      setBidAmountValue(parseInt(bidAmountSes));
+    }
+  }, []);
 
   const changeBid = (e) => {
     const currentBid = e.target.name === 'raise' ? props.bidAmount + bidAmountValue : props.bidAmount - bidAmountValue;
@@ -12,6 +19,7 @@ const Controls = (props) => {
         setShowAlert(false);
       }, 1500);
     } else {
+      sessionStorage.setItem('bidAmount', currentBid);
       setShowAlert(false);
       props.setBidAmount(currentBid);
     }
@@ -19,11 +27,13 @@ const Controls = (props) => {
 
   const changeBidAmount = (e) => {
     // eslint-disable-next-line radix
+    sessionStorage.setItem('bidAmountValue', parseInt(e.target.value));
+    // eslint-disable-next-line radix
     setBidAmountValue(parseInt(e.target.value));
   };
 
   return (
-    <div className="col-2" style={{ textAlign: 'center' }}>
+    <div className="col-3" style={{ textAlign: 'center' }}>
       <div >
         <h1>Current bid: {props.bidAmount}</h1>
       </div>

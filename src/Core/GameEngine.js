@@ -3,7 +3,7 @@ import AssetManager, { isFinishedLoading } from '../Core/AssetManager';
 import { drawImage } from '../Functions/drawFunctions';
 import { GAME_BACKGROUND } from '../Models/stateTypes';
 import store from '../store';
-import GameView from './GameView';
+import { GameView } from './GameView';
 
 
 const useLoadFiles = () => {
@@ -30,12 +30,10 @@ const useDrawBackground = (canvasRef) => {
   });
 };
 
-
 export const GameInit = () => {
   const canvasRef = useRef();
   useDrawBackground(canvasRef);
   GameView(canvasRef);
-
   return canvasRef;
 };
 

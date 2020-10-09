@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Options = () => {
+const Options = (props) => {
   const newGame = (e) => {
-    if (e.event.target === 'new_game') {
-      console.log('New game');
+    if (e.target.name === 'new_game') {
+      props.newGame('new_game');
     } else {
-      console.log('Reset game');
+      props.newGame('reset');
     }
   };
 
@@ -13,11 +13,11 @@ const Options = () => {
     <div style={{ textAlign: 'center' }} className="col-2">
       <h1>Options</h1>
       <div>
-        <button onClick={(e) => { newGame(e); }} type="button" style={{ width: '120px' }} name="new_game" className="btn btn-primary">New Game</button>
+        <button onClick={(e) => { newGame(e); }} type="button" style={{ width: '120px' }} name="new_game" className="btn btn-success">New Game</button>
       </div>
       <br />
       <div>
-        <button onClick={(e) => { newGame(e); }} type="button" style={{ width: '120px' }} name="reset_game" className="btn btn-primary">Reset Game</button>
+        <button onClick={(e) => { newGame(e); }} type="button" style={{ width: '120px' }} name="reset_game" className="btn btn-danger">Reset Game</button>
       </div>
     </div>
   );

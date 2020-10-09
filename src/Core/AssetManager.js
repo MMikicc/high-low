@@ -1,8 +1,9 @@
 import cards from '../Images/cards.gif';
+import x from '../Images/x.png';
 import gameBackground from '../Images/background.jpg';
 import store from '../store';
 import { addCard, addSprite, toggleLoaded } from '../StoreFunctions/actions';
-import { CARDS, GAME_BACKGROUND } from '../Models/stateTypes';
+import { CARDS, GAME_BACKGROUND, WRONG_CARD } from '../Models/stateTypes';
 
 const loadCards = () => {
   let i = 2;
@@ -66,6 +67,7 @@ export const isFinishedLoading = () => {
 const AssetManager = () => {
   loadCards();
   loadSprite(cards, CARDS);
+  loadSprite(x, WRONG_CARD);
   loadSprite(gameBackground, GAME_BACKGROUND);
 };
 

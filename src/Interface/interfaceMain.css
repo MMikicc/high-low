@@ -5,6 +5,15 @@
     color: white;
 }
 
+.interfaceDisable {
+    background-image: url('../Images/background.jpg');
+    background-position-y: center;
+    border-top: 5px dashed black;
+    color: white;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
 .alert {
     -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
        -moz-animation: fadein 1s; /* Firefox < 16 */

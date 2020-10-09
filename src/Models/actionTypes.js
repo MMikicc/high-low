@@ -4,3 +4,6 @@ export const SPRITE_ADDED = 'spriteAdded';
 export const CHANGE_STATE = 'changeState';
 export const PLAY_CARD = 'playCard';
 export const CHANGE_BANK = 'changeBank';
+export const ADD_REF = 'addRef';
+export const RESTART = 'restart';
+export const CHANGE_INTERFACE = 'Change interface';
