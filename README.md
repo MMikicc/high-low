@@ -4,8 +4,8 @@ The goal is to make a high low card poker game. Your goal is to guess if the nex
 
 Getting started:
 
--Download project
--Navigate to project
--Open console in main project directory
--Install dependencies (npm i)
--Start project (npm start)
+-Download project <br />
+-Navigate to project <br />
+-Open console in main project directory <br />
+-Install dependencies (npm i) <br />
+-Start project (npm start) <br />
