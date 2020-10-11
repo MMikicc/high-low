@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { SelectCardAnimation } from '../../Core/GameView';
+import { SelectCardAnimationI } from '../../Core/GameView';
 import { changeInterface } from '../../StoreFunctions/actions';
 
 const HighLow = (props) => {
@@ -8,7 +8,7 @@ const HighLow = (props) => {
 
   const PlayGame = (e) => {
     dispatch(changeInterface());
-    const checkWin = SelectCardAnimation(props.canvas, e.target.name);
+    const checkWin = SelectCardAnimationI(e.target.name);
     const result = checkWin();
     if (!result) {
       setTimeout(() => {

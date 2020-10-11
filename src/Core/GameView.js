@@ -202,8 +202,8 @@ const useDrawDeck = (canvasRef, x, y) => {
   });
 };
 
-export const SelectCardAnimation = (canvasRef, check) => {
-  const canvas = canvasRef.current;
+export const SelectCardAnimationI = (check) => {
+  const canvas = store.getState().canvas.current;
   const context = canvas.getContext('2d');
 
   const cardsImage = store.getState().sprites.find(sprite => sprite.name === CARDS);
@@ -218,6 +218,15 @@ export const SelectCardAnimation = (canvasRef, check) => {
     yPosition += cardHeight;
   }
   return SelectCard(context, window.innerWidth - window.innerHeight / 3, window.innerHeight / 10, xPosition, yPosition, cardsImage, check);
+};
+
+export const SelectNewCardI = () => {
+  const c = store.getState().canvas.current;
+  const { sprites } = store.getState();
+  const context = c.getContext('2d');
+  drawBackground(context);
+  reDraw(context, sprites.find(sprite => sprite.name === CARDS));
+  SelectCard(context, window.innerWidth - window.innerHeight / 3, window.innerHeight / 10, 50, window.innerHeight / 10, sprites.find(sprite => sprite.name === CARDS), 'default');
 };
 
 export const GameView = (canvasRef) => {

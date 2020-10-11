@@ -7,16 +7,12 @@ import Statistics from './Components/Statistics';
 import Options from './Components/Options';
 import './interfaceMain.css';
 import { changeBank, changeInterface, restartCards } from '../StoreFunctions/actions';
-import { drawBackground } from '../Core/GameEngine';
-import { reDraw, SelectCard } from '../Core/GameView';
-import { CARDS } from '../Models/stateTypes';
+import { SelectNewCardI } from '../Core/GameView';
 
 function Interface() {
   const stateBank = useSelector(state => state.bank);
   const stateInterface = useSelector(state => state.interface);
   const dispatch = useDispatch();
-  const canvas = useSelector(state => state.canvas);
-  const sprites = useSelector(state => state.sprites);
   const [bidAmount, setBidAmount] = useState(10);
   const [show, setShow] = useState(true);
 
@@ -35,7 +31,7 @@ function Interface() {
     dispatch(restartCards());
   };
 
-  const newGame = (newRreset) => { // to be implemented in GameEngine
+  const newGame = (newRreset) => {
     dispatch(changeInterface());
     if (newRreset === 'reset') {
       if (stateBank > 100) {
@@ -49,11 +45,7 @@ function Interface() {
     sessionStorage.setItem('bidAmount', 10);
     setBidAmount(10);
     reOpenCards();
-    const c = canvas.current;
-    const context = c.getContext('2d');
-    drawBackground(context);
-    reDraw(context, sprites.find(sprite => sprite.name === CARDS));
-    SelectCard(context, window.innerWidth - window.innerHeight / 3, window.innerHeight / 10, 50, window.innerHeight / 10, sprites.find(sprite => sprite.name === CARDS), 'default');
+    SelectNewCardI();
   };
 
   const updateBank = (result) => {
@@ -79,7 +71,6 @@ function Interface() {
       <Controls bank={stateBank} bidAmount={bidAmount} setBidAmount={setBidAmount} />
       <HighLow
         bidAmount={bidAmount}
-        canvas={canvas}
         updateBank={updateBank}
       />
       <Options newGame={newGame} />
